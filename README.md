@@ -93,3 +93,7 @@ git push -u origin main
 ```
 
 > Tips: Gunakan branch main sebagai standar utama jika belum diatur otomatis oleh Git.
+
+<br>
+
+## Install Typescript dan
