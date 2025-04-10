@@ -65,6 +65,8 @@ pnpm init
 
 Setelah perintah dijalankan, sebuah file `package.json` akan otomatis dibuat di dalam folder server, yang berfungsi untuk mengelola metadata proyek dan dependensi yang akan digunakan.
 
+<br>
+
 ### Inisialisasi Git dan GitHub
 
 Inisialisasikan Git di dalam proyek untuk membuat repository lokal:
