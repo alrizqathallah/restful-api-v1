@@ -1,1 +1,22 @@
-npx lint-staged
+echo ""
+echo "⏳ Running pre-commit checks..."
+
+echo "🛠️  Running lint-staged..."
+if ! npx lint-staged; then
+  echo ""
+  echo "❌ Lint-staged failed. Please fix errors before committing."
+  exit 1
+fi
+
+echo ""
+echo "🧪 Running tests..."
+if ! yarn test; then
+  echo ""
+  echo "❌ Tests failed. Commit cancelled."
+  exit 1
+fi
+
+echo ""
+echo "✅ All checks passed! Committing..."
+echo "🎉 Commit successful! All checks passed. 🚀"
+

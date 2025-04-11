@@ -5,3 +5,5 @@ logs
 package.json
 tsconfig.json
 yarn.lock
+__tests__
+.env.local
