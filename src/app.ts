@@ -4,21 +4,21 @@ import cookieParser from "cookie-parser";
 import helmet from "helmet";
 import morgan from "morgan";
 
-import envConfig from "./configs/env.config";
+import Env from "./configs/env.config";
 import HttpStatus from "./configs/http.config";
-import logUtil from "./utils/log.util";
+import logger from "./utils/logger";
 
 class App {
   public readonly express: Application;
 
   constructor() {
     this.express = express();
-    this.setupMiddlewares();
+    this.setupApplication();
     this.setupSecurity();
-    this.setupHealthCheck();
+    this.setupRoutes();
   }
 
-  private setupMiddlewares(): void {
+  private setupApplication(): void {
     this.express.use(express.json());
     this.express.use(express.urlencoded({ extended: true }));
     this.express.use(cookieParser());
@@ -29,18 +29,18 @@ class App {
     this.express.use(
       cors({
         credentials: true,
-        origin: envConfig.origin,
+        origin: Env.origin,
       })
     );
     this.express.use(helmet());
   }
 
-  private setupHealthCheck(): void {
+  private setupRoutes(): void {
     this.express.get("/health", (req: Request, res: Response) => {
-      logUtil.info("Health check passed");
+      logger.info("Health Check Status OK");
       res.status(HttpStatus.OK).json({
         status: "OK",
-        message: "Server is healthy",
+        message: "Health check OK",
       });
     });
   }

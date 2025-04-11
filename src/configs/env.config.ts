@@ -1,21 +1,21 @@
 import dotenv from "dotenv";
 import path from "path";
 
-class EnvConfig {
+class getEnv {
   public readonly port: number;
   public readonly env: string;
   public readonly origin: string;
 
   constructor() {
-    this.loadEnvFile();
-    this.port = parseInt(this.get("APP_PORT", "9000"));
-    this.env = this.get("APP_ENB", "development");
-    this.origin = this.get("APP_ORIGIN", "http://localhost:3000");
+    this.loadEnv();
+    this.port = parseInt(this.get("APP_PORT", "9000"), 10);
+    this.env = this.get("APP_ENV", "development");
+    this.origin = this.get("APP_ORIGIN");
   }
 
-  private loadEnvFile(): void {
+  private loadEnv(): void {
     dotenv.config({
-      path: path.join(process.cwd(), ".env.local"),
+      path: path.resolve(process.cwd(), ".env.local"),
     });
   }
 
@@ -28,4 +28,6 @@ class EnvConfig {
   }
 }
 
-export default new EnvConfig();
+const Env = new getEnv();
+
+export default Env;

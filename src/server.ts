@@ -1,22 +1,25 @@
 import App from "./app";
-import envConfig from "./configs/env.config";
-import logUtil from "./utils/log.util";
+import Env from "./configs/env.config";
+import logger from "./utils/logger";
 
 class Server {
-  private readonly app: App;
+  public app: App;
+  public port: number;
+  public env: string;
 
-  constructor(
-    private readonly port: number = envConfig.port,
-    private readonly mode: string = envConfig.env
-  ) {
+  constructor() {
     this.app = new App();
+    this.port = Env.port;
+    this.env = Env.env;
   }
 
   public start(): void {
     this.app.express.listen(this.port, () => {
-      logUtil.info(`Server running on port: ${this.port} in ${this.mode} mode`);
+      logger.info(`Server runnig on port ${this.port} in ${this.env} mode`);
     });
   }
 }
 
-new Server().start();
+const server = new Server();
+
+server.start();
